@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://puzzleonline.github.io/game/sitemap.xml
