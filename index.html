@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>2048 cupcakes Game</title>
+
+
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.csspp'><link rel="stylesheet" href="./style.css">
+ 	<style>	#bookmarkButton {
+     display: inline-block;
+    padding: 6px 11px;
+    border-radius: 30px;
+    background-image: linear-gradient(to right, #1f7f59, #3ee39d);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    font-weight: bolder;}
+#bookmarkButton:hover {transform: scale(1.05);}
+#bookmarkButton:active {transform: scale(0.95);}
+	</style>
+<style>
+
+.info a{
+color: rgb(250, 250, 250);
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.pokemon .number:hover {
+	background-color: rgb(0 0 0 / 20%);
+	border-radius: 5px;
+	font-size: 0.8em;
+	padding: 9px 19px;
+}
+
+
+</style>
+  
+ <style>
+  @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background: #EFEFBB;
+	background: -webkit-linear-gradient(to right, #D4D3DD, #EFEFBB);
+	background: linear-gradient(to right, #D4D3DD, #EFEFBB);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Lato';
+	margin: 0;
+}
+
+h1 {
+	letter-spacing: 3px;
+}
+
+.poke-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: space-between;
+	justify-content: center;
+	margin: 0 auto;
+	max-width: 1200px;
+}
+
+.pokemon {
+	background-color: #eee;
+	border-radius: 4px;
+	box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+	margin: 10px;
+	padding: 20px;
+	text-align: center;
+	border: 3px solid rgba(0,0,0,.125);
+}
+
+.pokemon:hover {
+    background-color: ;
+    border-radius: 1px;
+	    box-shadow: 0 3px 15px rgb(100 100 100 / 16%);
+		    opacity: 0.9;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    border: 3px solid rgba(0,0,0,.125);
+}
+
+.pokemon .img-container {
+	background-color: rgba(255, 255, 255, 0.6);
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	text-align: center;
+}
+
+/*.pokemon .img-container img {
+	margin-top: 20px;
+	max-width: 90%;
+}*/
+
+.pokemon .img-container img {
+    /* margin-top: 0px; */
+    /* max-width: 90%; */
+    box-shadow: 0px 1px 5px 5px rgb(0 0 0 / 23%);
+    /* border: none; */
+    /* position: relative; */
+    /* border-radius: 10px; */
+    /* overflow: hidden; */
+    /* transition: all 0.3s; */
+    /* transform: translateY(0px); */
+    /* position: relative; */
+    /* display: inline-flex; */
+    width: var(--size, 7rem);
+    height: var(--size, 7.2rem);
+    /* background-color: #eee; */
+    border-radius: 50%;
+	cursor: pointer;
+}
+h3.name {
+    /* overflow: hidden; */
+    /* text-overflow: ellipsis; */
+    font-size: 16px;
+}
+
+.pokemon .info {
+	margin-top: 20px;
+}
+
+.pokemon .number {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	font-size: 0.8em;
+	padding: 9px 19px;
+  border: 1px solid rgba(0,0,0,.125);
+    box-shadow: inset -1px 0px 5px 6px rgb(100 100 100 / 16%);
+
+}
+
+
+.pokemon .name {
+    margin: 15px 0 7px;
+    letter-spacing: 1px;
+    max-width: 130px;
+    overflow: hidden;
+
+    /* text-overflow: ellipsis; */
+}
+
+/* SOCIAL PANEL CSS */
+.social-panel-container {
+	position: fixed;
+	right: 0;
+	bottom: 80px;
+	transform: translateX(100%);
+	transition: transform 0.4s ease-in-out;
+}
+
+.social-panel-container.visible {
+	transform: translateX(-10px);
+}
+
+.social-panel {	
+	background-color: #fff;
+	border-radius: 16px;
+	box-shadow: 0 16px 31px -17px rgba(0,31,97,0.6);
+	border: 5px solid #001F61;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Muli';
+	position: relative;
+	height: 169px;	
+	width: 370px;
+	max-width: calc(100% - 10px);
+}
+
+.social-panel button.close-btn {
+	border: 0;
+	color: #97A5CE;
+	cursor: pointer;
+	font-size: 20px;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+}
+
+.social-panel button.close-btn:focus {
+	outline: none;
+}
+
+.social-panel p {
+	background-color: #001F61;
+	border-radius: 0 0 10px 10px;
+	color: #fff;
+	font-size: 14px;
+	line-height: 18px;
+	padding: 2px 17px 6px;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	margin: 0;
+	transform: translateX(-50%);
+	text-align: center;
+	width: 235px;
+}
+
+.social-panel p i {
+	margin: 0 5px;
+}
+
+.social-panel p a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+.social-panel h4 {
+	margin: 20px 0;
+	color: #97A5CE;	
+	font-family: 'Muli';	
+	font-size: 14px;	
+	line-height: 18px;
+	text-transform: uppercase;
+}
+
+.social-panel ul {
+	display: flex;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+.social-panel ul li {
+	margin: 0 10px;
+}
+
+.social-panel ul li a {
+	border: 1px solid #DCE1F2;
+	border-radius: 50%;
+	color: #001F61;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	width: 50px;
+	text-decoration: none;
+}
+
+.social-panel ul li a:hover {
+	border-color: #FF6A00;
+	box-shadow: 0 9px 12px -9px #FF6A00;
+}
+
+.floating-btn {
+	border-radius: 26.5px;
+	background-color: #001F61;
+	border: 1px solid #001F61;
+	box-shadow: 0 16px 22px -17px #03153B;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 20px;
+	padding: 12px 20px;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 999;
+}
+
+.floating-btn:hover {
+	background-color: #ffffff;
+	color: #001F61;
+}
+
+.floating-btn:focus {
+	outline: none;
+}
+
+.floating-text {
+	background-color: #001F61;
+	border-radius: 10px 10px 0 0;
+	color: #fff;
+	font-family: 'Muli';
+	padding: 7px 15px;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.floating-text a {
+	color: #FF7500;
+	text-decoration: none;
+}
+
+@media screen and (max-width: 360px) {
+
+	.social-panel-container.visible {
+		transform: translateX(0px);
+	}
+	
+	.floating-btn {
+		right: 10px;
+	}
+  
+  .poke-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-between;
+    justify-content: center;
+   /* margin: 0 auto;
+     max-width: 2000px; */
+}
+}
+ </style>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!-- Design inspired by this Dribbble shot: https://dribbble.com/shots/5611109--Pokemon -->
+
+<h1>2048 Games</h1>
+  <button id="bookmarkButton" onclick="bookmarkPage()">Bookmark Page</button> 
+<div id="poke_container" class="poke-container">
+
+				  <div class="pokemon" style="background-color: rgb(241 209 181);">
+						<div class="img-container">
+						<a href="https://2048-cupcake.blogspot.com/2021/04/2048-game.html"target="_blank">	<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-game-online.webp"  alt="2048 Classic"> </a>
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-game.html"target="_blank"><span class="number">Play </span> </a>
+							<h3 class="name">2048 Classic</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(205 194 179);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-cupcakes-CLASSIC.webp" alt="2048 CUPCAKES Master">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-cupcakes-master.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 CUPCAKES Master</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(251 162 190);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-cupcakes.webp" alt="2048 CUPCAKES">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-cupcakes.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 CUPCAKES</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(243 192 181);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-5x5.webp" alt="2048 Master 5X5">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-5x5.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 Master 5X5</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(95 85 96);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048starwars.webp" alt="2048 Starwars">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-starwars.html" target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 Starwars</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(189 235 187);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-fifaworldcup.webp" alt="2048 FIFA World Cup">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-fifa-world-cup.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 FIFA World Cup</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(247 183 210);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-Superheels.webp" alt="2048 SuperHeels">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-superheels.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 SuperHeels</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(222, 253, 224);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048pantone.webp" alt="2048 Pantone">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-pantone.html"target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 Pantone</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(187 239 228);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048tiffany.webp" alt="2048 TIFFANY">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/03/2048-tiffany.html" target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 TIFFANY</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					 <div class="pokemon" style="background-color: rgb(121 136 112);">
+						<div class="img-container">
+							<img src="https://2048-cupcake.github.io/2048cupcakes/h-image/2048-army.webp" alt="2048 ARMY">
+						</div>
+						<div class="info">
+							<a href="https://2048-cupcake.blogspot.com/2021/04/2048-army.html" target="_blank"><span class="number">Play</span></a>
+							<h3 class="name">2048 ARMY</h3>
+							<small class="type">* <span>Single Player Game </span></small>
+						</div>
+					</div>
+					
+					
+					
+</div>
+
+
+
+<div id="poke_container" class="poke-container">
+
+<script>
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+		if(this.readyState == 4 && this.status == 200) {
+	    var response = JSON.parse(xhttp.responseText);
+		var user = response.user;
+		var showdata = "";
+				//for(var i = 0; i < user.length; i++) {
+                  
+                  for (var i = user.length - 1; i >= 0; i--){
+					//showdata += ' <div id=' + user[i].url + ' class="userpost">';
+		           // showdata += '<div>';
+
+//showdata += '<div class="main-container">';
+//showdata += '<ul class="grid-wrapper">';
+/*showdata += '<li><a href="' + user[i].websiteurl + '"   target="_blank" data-overlay-text="' + user[i].gamename + '"  class="overlay-container" >	<img src="' + user[i].image + '"  class="overlay-img"   alt="2048 Classic"> </a>';    //<h2 class="gamename">'+user[i].gamename+ '</h2>';  
+  
+  
+ showdata += ' </li>';
+ */
+ 
+ 
+ 
+ 
+ 
+ showdata += '<div class="pokemon" style="background-color: rgb(241 209 181);">';
+						showdata += '<div class="img-container"> <img src="' + user[i].image + '"  class="overlay-img"   alt="2048 Classic"> ';
+						showdata += '</div>';
+						showdata += '<div class="info"><a href="' + user[i].websiteurl + '"  target="_blank"><span class="number">Play</span></a>';
+							showdata += '<h3 class="name">' + user[i].gamename + '</h3>';
+							showdata += '<small class="type">* <span>Single Player Game </span></small>';
+						showdata += '</div>';
+					showdata += '</div>';
+ 
+ 
+ 
+//showdata += '</ul>';
+//showdata += '</div>';
+					//showdata += '</div>';
+					//showdata += '</div>';
+								
+									
+							}
+							document.write(showdata);
+						}
+					}; 
+var _0x6a76=["\x47\x45\x54","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x73\x63\x72\x69\x70\x74\x2E\x67\x6F\x6F\x67\x6C\x65\x2E\x63\x6F\x6D\x2F\x6D\x61\x63\x72\x6F\x73\x2F\x73\x2F\x41\x4B\x66\x79\x63\x62\x78\x51\x6C\x65\x46\x59\x75\x63\x72\x44\x69\x72\x62\x4E\x37\x74\x68\x65\x73\x6E\x57\x49\x70\x31\x48\x5A\x51\x6F\x5F\x75\x6E\x41\x2D\x5A\x39\x31\x52\x4D\x78\x6F\x6A\x51\x4D\x64\x68\x76\x76\x67\x43\x5A\x4A\x51\x31\x6F\x46\x4C\x38\x70\x75\x50\x71\x4E\x4B\x43\x61\x42\x39\x41\x2F\x65\x78\x65\x63","\x6F\x70\x65\x6E","\x73\x65\x6E\x64"];xhttp[_0x6a76[2]](_0x6a76[0],_0x6a76[1],false);xhttp[_0x6a76[3]]()
+      
+      
+					</script>
+</div>
+
+
+
+
+<!-- SOCIAL PANEL HTML --
+<div class="social-panel-container">
+	<div class="social-panel">
+		<p>Created with <i class="fa fa-heart"></i> by
+			<a target="_blank" href="https://florin-pop.com">Florin Pop</a></p>
+		<button class="close-btn"><i class="fas fa-times"></i></button>
+		<h4>Get in touch on</h4>
+		<ul>
+			<li>
+				<a href="https://twitter.com/florinpop1705" target="_blank">
+					<i class="fab fa-twitter"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://linkedin.com/in/florinpop17" target="_blank">
+					<i class="fab fa-linkedin"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://facebook.com/florinpop17" target="_blank">
+					<i class="fab fa-facebook"></i>
+				</a>
+			</li>
+			<li>
+				<a href="https://instagram.com/florinpop17" target="_blank">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<button class="floating-btn">
+	Get in Touch
+</button>
+<!--
+<div class="floating-text">
+	Part of <a href="https://florin-pop.com/blog/2019/09/100-days-100-projects" target="_blank">#100Days100Projects</a>
+</div>
+<!-- partial --
+  <script  src="./script.jspp"></script>-->
+    <script>
+        // JavaScript function to encourage users to bookmark the page
+        function bookmarkPage() {
+            if (window.navigator.userAgent.indexOf("Chrome") != -1 || window.navigator.userAgent.indexOf("Firefox") != -1) {
+                alert("To bookmark this page, please press Ctrl+D (Cmd+D on Mac).");
+            } else {
+                alert("Unfortunately, automatic bookmarking is not supported in your browser. Please use the browser's bookmarking feature manually.");
+            }
+        }
+    </script>
+</body>
+</html>
